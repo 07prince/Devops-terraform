@@ -27,7 +27,7 @@ resource "aws_vpc" "vpc" {
 13.
 */
 
-
+# internet gateway is created
 resource "aws_internet_gateway" "vpc-gateway" {
   vpc_id = aws_vpc.vpc.id
   tags = {
@@ -36,7 +36,7 @@ resource "aws_internet_gateway" "vpc-gateway" {
 
 }
 
-
+# subnet creation code for public subnet
 resource "aws_subnet" "public-vpc-subnet" {
   vpc_id = aws_vpc.vpc.id
   tags = {
@@ -48,7 +48,7 @@ resource "aws_subnet" "public-vpc-subnet" {
 
 }
 
-
+# route table creation in public subnet
 resource "aws_route_table" "public-vpc-route-table" {
   vpc_id = aws_vpc.vpc.id
   tags = {
@@ -61,7 +61,7 @@ resource "aws_route_table" "public-vpc-route-table" {
   }
 }
 
-
+# route table association with the public subnet
 resource "aws_route_table_association" "public-subnet-route-table-association" {
     subnet_id = aws_subnet.public-vpc-subnet.id
     route_table_id = aws_route_table.public-vpc-route-table.id
